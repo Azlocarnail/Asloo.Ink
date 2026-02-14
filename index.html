@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Asloo.ink | Academic Store</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@1,700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --purple-main: #6c5ce7;
+            --bg-soft-white: #f8f9fa;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--bg-soft-white);
+            scroll-behavior: smooth;
+        }
+
+        #nav-toggle, #search-toggle { display: none; }
+
+        /* Header */
+        .header-bar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 15px 5%;
+            background: white;
+            border-bottom: 2px solid #eee;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .menu-btn, .search-icon { font-size: 28px; cursor: pointer; color: var(--purple-main); }
+        .logo { font-family: 'Playfair Display', serif; font-size: 24px; font-weight: bold; color: var(--purple-main); text-decoration: none; }
+
+        /* Side Nav */
+        .sidenav {
+            height: 100%; width: 280px; position: fixed; z-index: 2000;
+            top: 0; left: -280px; background: white; box-shadow: 2px 0 15px rgba(0,0,0,0.1);
+            transition: 0.3s ease; padding-top: 60px;
+        }
+        .sidenav a {
+            padding: 12px 20px; text-decoration: none; font-size: 18px; color: white;
+            background: var(--purple-main); display: block; margin: 15px 25px; border-radius: 12px; text-align: center;
+        }
+        #nav-toggle:checked ~ .sidenav { left: 0; }
+
+        /* Search Area */
+        .search-container {
+            max-height: 0; overflow: hidden; background: white; transition: 0.3s ease; text-align: center;
+        }
+        #search-toggle:checked ~ .search-container { max-height: 150px; padding: 20px 5%; border-bottom: 3px solid var(--purple-main); }
+        #search-input { width: 60%; padding: 12px; border: 2px solid var(--purple-main); border-radius: 12px; outline: none; }
+        .search-btn { padding: 12px 20px; background: var(--purple-main); color: white; border: none; border-radius: 12px; cursor: pointer; margin-left: 5px; }
+
+        /* Content */
+        .hero { padding: 40px 20px; text-align: center; }
+        .hero h2 { color: var(--purple-main); font-size: 2.2rem; }
+
+        .notes-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px; padding: 20px 5%; max-width: 1100px; margin: 0 auto;
+        }
+        .card {
+            background: var(--purple-main); color: white; padding: 30px; border-radius: 20px;
+            text-align: center; text-decoration: none; transition: 0.3s;
+        }
+
+        /* Results Display */
+        .subject-detail {
+            display: none; margin: 40px 5%; padding: 60px 20px;
+            background: #f1f0ff; border-radius: 25px; text-align: center;
+        }
+        .subject-detail:target { display: block; }
+        #error-space { display: none; margin: 20px 5%; padding: 40px; background: #ffebeb; border-radius: 25px; text-align: center; color: #d63031; }
+    </style>
+</head>
+<body>
+
+    <input type="checkbox" id="nav-toggle">
+    <input type="checkbox" id="search-toggle">
+
+    <div class="sidenav">
+        <label for="nav-toggle" style="position: absolute; top: 10px; right: 25px; font-size: 36px; color: var(--purple-main); cursor: pointer;">&times;</label>
+        <a href="#" onclick="clearError()">Home</a>
+        <a href="#notes" onclick="clearError()">Notes</a>
+    </div>
+
+    <header class="header-bar">
+        <label for="nav-toggle" class="menu-btn">&#9776;</label>
+        <a href="#" class="logo">Asloo.ink</a>
+        <label for="search-toggle" class="search-icon">&#128269;</label>
+    </header>
+
+    <div class="search-container">
+        <input type="text" id="search-input" placeholder="Subject name enter cheyyu...">
+        <button class="search-btn" onclick="runSearch()">Search</button>
+    </div>
+
+    <div class="hero">
+        <h2>Asloo here</h2>
+        <p>notesin vendi oru web lessgoo <3</p>
+    </div>
+
+    <div id="notes" class="notes-grid">
+        <a href="#tourism" class="card" onclick="clearError()"><h3>Tourism Marketing</h3></a>
+        <a href="#heritage" class="card" onclick="clearError()"><h3>Heritage Tourism</h3></a>
+        <a href="#leisure" class="card" onclick="clearError()"><h3>Leisure Management</h3></a>
+        <a href="#economics" class="card" onclick="clearError()"><h3>Economics of Tourism</h3></a>
+        <a href="#env" class="card" onclick="clearError()"><h3>VAC Environmental</h3></a>
+        <a href="#prof" class="card" onclick="clearError()"><h3>SEC Professional</h3></a>
+    </div>
+
+    <div id="error-space">
+        <h1>Aganeru sanam illa 😭</h1>
+        <p>Spelling onnu nokku, allekil Asloo upload cheyyunnathu vare wait cheyyu!</p>
+    </div>
+
+    <div id="tourism" class="subject-detail"><h1>Tourism Marketing</h1><p>Notes coming soon...</p></div>
+    <div id="heritage" class="subject-detail"><h1>Heritage Tourism</h1><p>Notes coming soon...</p></div>
+    <div id="leisure" class="subject-detail"><h1>Leisure Management</h1><p>Notes coming soon...</p></div>
+    <div id="economics" class="subject-detail"><h1>Economics of Tourism</h1><p>Notes coming soon...</p></div>
+    <div id="env" class="subject-detail"><h1>VAC Environmental</h1><p>Notes coming soon...</p></div>
+    <div id="prof" class="subject-detail"><h1>SEC Professional</h1><p>Notes coming soon...</p></div>
+
+    <script>
+        function clearError() {
+            document.getElementById('error-space').style.display = "none";
+        }
+
+        function runSearch() {
+            const query = document.getElementById('search-input').value.toLowerCase().trim();
+            const error = document.getElementById('error-space');
+            
+            const subjects = {
+                "tourism": "tourism", "marketing": "tourism",
+                "heritage": "heritage", "leisure": "leisure",
+                "economics": "economics", "environmental": "env",
+                "vac": "env", "professional": "prof", "sec": "prof"
+            };
+
+            clearError();
+            
+            let found = false;
+            if (query !== "") {
+                for (let key in subjects) {
+                    if (query.includes(key)) {
+                        window.location.hash = subjects[key];
+                        found = true;
+                        document.getElementById('search-toggle').checked = false;
+                        break;
+                    }
+                }
+            }
+
+            if (!found && query !== "") {
+                error.style.display = "block";
+                error.scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+    </script>
+</body>
+</html> 
