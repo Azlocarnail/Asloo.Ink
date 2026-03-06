@@ -1,10 +1,10 @@
 
-    <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>For Sana Kochu</title>
+    <title>For Sana Kochu ❤️</title>
     <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Dancing+Script:wght@600&display=swap" rel="stylesheet">
     <style>
         body {
@@ -20,25 +20,26 @@
             position: relative;
         }
 
-        /* Background Hearts */
+        /* 50% Opacity Hearts */
         .heart {
             position: absolute;
-            color: rgba(255, 182, 193, 0.5); /* 50% opacity pink */
+            color: rgba(255, 182, 193, 0.5);
             font-size: 30px;
             user-select: none;
             z-index: 1;
         }
 
-        /* Main Box */
         .container {
-            background-color: #ffdae0; /* Darker pink box */
+            background-color: #ffdae0; /* Darker Pink Box */
             padding: 50px 40px;
             border-radius: 30px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.05);
             text-align: center;
             z-index: 10;
-            max-width: 90%;
+            width: 85%;
+            max-width: 450px;
             border: 2px solid #ffb6c1;
+            transition: 0.5s;
         }
 
         h1 {
@@ -50,53 +51,62 @@
         .btn-container {
             display: flex;
             justify-content: center;
-            gap: 20px;
-            height: 60px;
-            align-items: center;
+            gap: 40px; /* Buttons thammil gap set cheythu */
+            min-height: 80px;
+            position: relative;
         }
 
         button {
-            padding: 10px 35px;
+            padding: 12px 35px;
             font-size: 1.8rem;
             cursor: pointer;
             border-radius: 15px;
             border: none;
             font-family: 'Dancing Script', cursive;
-            transition: 0.2s;
+            transition: transform 0.1s ease;
+            z-index: 20;
         }
 
         #yesBtn {
             background-color: #ff69b4;
             color: white;
+            position: relative;
         }
 
         #noBtn {
             background-color: #ffffff;
             color: #ff69b4;
-            position: absolute; /* Needed for random movement */
+            border: 1px solid #ffb6c1;
+            position: absolute; /* Needed for movement */
+            left: 60%; /* Initial position fix */
         }
 
-        /* Result Popup */
         #result {
             display: none;
-            font-size: 3.5rem;
+            font-size: 4rem;
             color: #d63384;
-            margin-top: 20px;
             animation: heartBeat 1s infinite;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 100%;
+            text-align: center;
+            z-index: 30;
         }
 
         @keyframes heartBeat {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.1); }
-            100% { transform: scale(1); }
+            0% { transform: translate(-50%, -50%) scale(1); }
+            50% { transform: translate(-50%, -50%) scale(1.1); }
+            100% { transform: translate(-50%, -50%) scale(1); }
         }
     </style>
 </head>
 <body>
 
     <div class="heart" style="top:10%; left:10%;">❤</div>
-    <div class="heart" style="top:20%; right:15%;">❤</div>
-    <div class="heart" style="bottom:15%; left:20%;">❤</div>
+    <div class="heart" style="top:25%; right:15%;">❤</div>
+    <div class="heart" style="bottom:20%; left:20%;">❤</div>
     <div class="heart" style="bottom:10%; right:10%;">❤</div>
     <div class="heart" style="top:50%; left:5%;">❤</div>
     <div class="heart" style="top:40%; right:5%;">❤</div>
@@ -108,33 +118,36 @@
             <button id="yesBtn" onclick="showLove()">Yes</button>
             <button id="noBtn" onmouseover="moveNo()" onclick="moveNo()">No</button>
         </div>
-
-        <div id="result">I knew it! ❤️</div>
     </div>
 
+    <div id="result">I knew it! ❤️</div>
+
     <script>
-        // No button-ne odikkaan ulla function
         function moveNo() {
             const btn = document.getElementById('noBtn');
-            // Window-inte width-um height-um nokkunnu
-            const x = Math.random() * (window.innerWidth - btn.offsetWidth);
-            const y = Math.random() * (window.innerHeight - btn.offsetHeight);
+            const container = document.getElementById('mainBox');
             
-            btn.style.left = x + 'px';
-            btn.style.top = y + 'px';
+            // Screen limits calculate cheyyunnu
+            const maxX = window.innerWidth - btn.offsetWidth - 20;
+            const maxY = window.innerHeight - btn.offsetHeight - 20;
+            
+            // Random aayi oru spot kandupidikkunnu
+            const randomX = Math.floor(Math.random() * maxX);
+            const randomY = Math.floor(Math.random() * maxY);
+            
+            // Container-inu purathekku jump ചെയ്യിക്കുന്നു
+            btn.style.position = 'fixed';
+            btn.style.left = randomX + 'px';
+            btn.style.top = randomY + 'px';
         }
 
-        // Yes click cheyvumbo
         function showLove() {
-            document.getElementById('question').style.display = 'none';
-            document.getElementById('yesBtn').style.display = 'none';
-            document.getElementById('noBtn').style.display = 'none';
-            document.getElementById('result').style.display = 'block';
-            
-            // Background box white aakkunnu to focus on text
-            document.getElementById('mainBox').style.backgroundColor = 'transparent';
-            document.getElementById('mainBox').style.boxShadow = 'none';
-            document.getElementById('mainBox').style.border = 'none';
+            // Screen clear cheyyunnu
+            document.getElementById('mainBox').style.opacity = '0';
+            setTimeout(() => {
+                document.getElementById('mainBox').style.display = 'none';
+                document.getElementById('result').style.display = 'block';
+            }, 500);
         }
     </script>
 </body>
