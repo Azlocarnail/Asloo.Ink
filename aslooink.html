@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -50,7 +51,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            gap: 20px; /* Side by side gap */
+            gap: 20px;
             min-height: 100px;
             position: relative;
         }
@@ -68,16 +69,16 @@
         #yesBtn {
             background-color: #ff69b4;
             color: white;
-            /* Ithu static aayi avide thanne nikunnu */
         }
 
         #noBtn {
             background-color: #ffffff;
             color: #ff69b4;
             border: 1px solid #ffb6c1;
-            /* Side-by-side setup */
-            position: relative; 
-            transition: 0.1s;
+            /* Instant neengal fix cheyyan */
+            position: absolute;
+            right: 15%; 
+            transition: 0.1s ease-out;
         }
 
         #result {
@@ -115,7 +116,7 @@
         
         <div class="btn-container">
             <button id="yesBtn" onclick="showLove()">Yes</button>
-            <button id="noBtn" onmouseover="moveNo()" onclick="moveNo()">No</button>
+            <button id="noBtn" onmouseover="moveNo()" ontouchstart="moveNo()">No</button>
         </div>
     </div>
 
@@ -125,13 +126,14 @@
         function moveNo() {
             const btn = document.getElementById('noBtn');
             
-            // Buttons thammil overlap aavathe jump ചെയ്യിക്കാൻ fixed position use cheyyunnu
+            // Screen limits within safe area
             const maxX = window.innerWidth - btn.offsetWidth - 30;
             const maxY = window.innerHeight - btn.offsetHeight - 30;
             
             const randomX = Math.floor(Math.random() * maxX);
             const randomY = Math.floor(Math.random() * maxY);
             
+            // Position 'fixed' aakki instant movement koduthu
             btn.style.position = 'fixed';
             btn.style.left = randomX + 'px';
             btn.style.top = randomY + 'px';
@@ -146,4 +148,4 @@
         }
     </script>
 </body>
-</html>
+</html> 
