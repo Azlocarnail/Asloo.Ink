@@ -13,13 +13,12 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            background-color: #ffffff; /* White Screen */
+            background-color: #ffffff; 
             overflow: hidden;
-            font-family: 'Great Vibes', cursive; /* Italian Classic Font */
+            font-family: 'Great Vibes', cursive;
             position: relative;
         }
 
-        /* 50% Opacity Pink Hearts scattered around */
         .heart-bg {
             position: absolute;
             color: rgba(255, 182, 193, 0.5);
@@ -28,10 +27,9 @@
             z-index: 1;
         }
 
-        /* Main Container Box */
         .glass-box {
-            background-color: #ffdae0; /* Darker Pink Box */
-            padding: 60px 40px;
+            background-color: #ffdae0;
+            padding: 50px 30px;
             border-radius: 40px;
             box-shadow: 0 15px 35px rgba(214, 51, 132, 0.1);
             text-align: center;
@@ -39,13 +37,64 @@
             width: 90%;
             max-width: 500px;
             border: 2px solid #ffb6c1;
+            transition: 0.5s;
+        }
+
+        .step-counter {
+            font-family: 'Dancing Script', cursive;
+            font-size: 1.2rem;
+            color: #d63384;
+            margin-bottom: 10px;
+            opacity: 0.7;
         }
 
         h1 {
-            font-size: 3.5rem;
+            font-size: 2.8rem;
             color: #d63384;
-            margin-bottom: 40px;
+            margin-bottom: 30px;
             font-weight: normal;
+            line-height: 1.2;
+        }
+
+        .options-container {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .opt-btn {
+            background-color: #ffffff;
+            color: #d63384;
+            border: 1px solid #ffb6c1;
+            padding: 12px 20px;
+            font-size: 1.6rem;
+            cursor: pointer;
+            border-radius: 15px;
+            font-family: 'Dancing Script', cursive;
+            transition: 0.3s;
+            text-align: left;
+            display: flex;
+            align-items: center;
+        }
+
+        .opt-btn:hover {
+            background-color: #ff69b4;
+            color: white;
+            transform: scale(1.02);
+        }
+
+        .opt-label {
+            font-family: Arial, sans-serif;
+            font-weight: bold;
+            font-size: 1rem;
+            margin-right: 15px;
+            background: #ffdae0;
+            width: 28px;
+            height: 28px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
         }
 
         .action-area {
@@ -54,36 +103,31 @@
             gap: 30px;
             min-height: 80px;
             align-items: center;
-        }
-
-        button {
-            padding: 12px 40px;
-            font-size: 2rem;
-            cursor: pointer;
-            border-radius: 20px;
-            border: none;
-            font-family: 'Dancing Script', cursive;
-            transition: 0.3s;
+            position: relative;
         }
 
         #yesBtn {
             background-color: #ff69b4;
             color: white;
-            box-shadow: 0 5px 15px rgba(255, 105, 180, 0.3);
+            padding: 12px 40px;
+            font-size: 2rem;
+            border-radius: 20px;
+            border: none;
+            font-family: 'Dancing Script', cursive;
+            cursor: pointer;
         }
 
         #noBtn {
             background-color: #ffffff;
             color: #ff69b4;
-            position: absolute; /* Essential for jumping around */
+            position: absolute;
             border: 1px solid #ffb6c1;
+            padding: 12px 40px;
+            font-size: 2rem;
+            border-radius: 20px;
+            font-family: 'Dancing Script', cursive;
+            cursor: pointer;
             z-index: 100;
-        }
-
-        /* Secret Message Box */
-        #secret-message {
-            display: none;
-            text-align: center;
         }
 
         #secret-message h2 {
@@ -95,9 +139,11 @@
 
         @keyframes pulse {
             0% { transform: scale(1); }
-            50% { transform: scale(1.05); }
+            50% { transform: scale(1.08); }
             100% { transform: scale(1); }
         }
+
+        .hidden { display: none; }
     </style>
 </head>
 <body>
@@ -107,11 +153,15 @@
     <div class="heart-bg" style="bottom: 15%; left: 10%;">❤</div>
     <div class="heart-bg" style="bottom: 25%; right: 15%;">❤</div>
     <div class="heart-bg" style="top: 50%; left: 5%;">❤</div>
-    <div class="heart-bg" style="top: 45%; right: 8%;">❤</div>
-    <div class="heart-bg" style="bottom: 5%; left: 45%;">❤</div>
 
     <div class="glass-box" id="mainContainer">
-        <div id="quiz-content">
+        <div id="quiz-section">
+            <div class="step-counter" id="stepText">Question 1 of 8</div>
+            <h1 id="questionText">Loading...</h1>
+            <div class="options-container" id="optionsContainer"></div>
+        </div>
+
+        <div id="final-section" class="hidden">
             <h1>Sana kochee enne ishtaanoo?</h1>
             <div class="action-area">
                 <button id="yesBtn" onclick="revealLove()">Yes</button>
@@ -119,38 +169,75 @@
             </div>
         </div>
 
-        <div id="secret-message">
+        <div id="secret-message" class="hidden">
             <h2>I knew it ! ❤️</h2>
         </div>
     </div>
 
     <script>
-        // No button-ne thodaan sammathikkilla!
+        const questions = [
+            { q: "What do you think about Asloo?", a: ["I think about him occasionally", "I think about him sometimes", "I think about him quite often", "I think about him more than I expected"] },
+            { q: "How do you feel when Asloo talks to you?", a: ["It feels a little nice", "It feels pretty nice", "It makes me happy", "It makes me really happy"] },
+            { q: "If Asloo stopped talking for a while, what would happen?", a: ["I’d probably notice", "I’d miss him a little", "I’d miss him quite a bit", "I’d really miss him"] },
+            { q: "Why do you think you feel this way about Asloo?", a: ["Maybe I like him a little", "I probably like him", "I like him quite a lot", "I might actually love him"] },
+            { q: "When Asloo’s name pops up on your phone, what’s your reaction?", a: ["I feel a little curious", "I feel a bit happy", "I smile when I see it", "I get really happy"] },
+            { q: "If someone asked you about Asloo, what would you say?", a: ["He’s someone important", "He’s special to me", "I care about him a lot", "He means a lot to me"] },
+            { q: "Be honest… what word best describes your feelings?", a: ["A growing feeling", "A strong liking", "Deep affection", "Something very close to love"] },
+            { q: "So… what feels most accurate about your feelings for Asloo?", a: ["I might be falling for Asloo", "I’m probably falling for Asloo", "I think I love Asloo", "I definitely love Asloo"] }
+        ];
+
+        let currentStep = 0;
+        const labels = ["A", "B", "C", "D"];
+
+        function loadQuestion() {
+            if (currentStep < questions.length) {
+                const qData = questions[currentStep];
+                document.getElementById('stepText').innerText = `Question ${currentStep + 1} of 8`;
+                document.getElementById('questionText').innerText = qData.q;
+                
+                const container = document.getElementById('optionsContainer');
+                container.innerHTML = '';
+
+                qData.a.forEach((opt, i) => {
+                    const btn = document.createElement('button');
+                    btn.className = 'opt-btn';
+                    btn.innerHTML = `<span class="opt-label">${labels[i]}</span> ${opt}`;
+                    btn.onclick = nextQuestion;
+                    container.appendChild(btn);
+                });
+            } else {
+                document.getElementById('quiz-section').classList.add('hidden');
+                document.getElementById('final-section').classList.remove('hidden');
+            }
+        }
+
+        function nextQuestion() {
+            currentStep++;
+            loadQuestion();
+        }
+
         function moveNo() {
             const btn = document.getElementById('noBtn');
-            // Calculating random positions within the screen
             const padding = 50;
             const maxX = window.innerWidth - btn.offsetWidth - padding;
             const maxY = window.innerHeight - btn.offsetHeight - padding;
             
-            const randomX = Math.floor(Math.random() * maxX);
-            const randomY = Math.floor(Math.random() * maxY);
-            
-            btn.style.left = randomX + 'px';
-            btn.style.top = randomY + 'px';
+            btn.style.position = 'fixed';
+            btn.style.left = Math.random() * maxX + 'px';
+            btn.style.top = Math.random() * maxY + 'px';
         }
 
-        // Yes click cheyvumbo ulla magic
         function revealLove() {
-            document.getElementById('quiz-content').style.display = 'none';
-            document.getElementById('secret-message').style.display = 'block';
+            document.getElementById('final-section').classList.add('hidden');
+            document.getElementById('secret-message').classList.remove('hidden');
             
-            // Making the box transparent for a cleaner "I knew it" look
             const container = document.getElementById('mainContainer');
             container.style.backgroundColor = 'transparent';
             container.style.border = 'none';
             container.style.boxShadow = 'none';
         }
+
+        loadQuestion();
     </script>
 </body>
 </html>
