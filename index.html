@@ -3,144 +3,182 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>For Sana Kochu ❤️</title>
-    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Dancing+Script:wght@600&display=swap" rel="stylesheet">
+    <title>Filamenta | Interactive Pitch & Deck</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;700;800&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
     <style>
-        body {
+        * {
+            box-sizing: border-box;
             margin: 0;
             padding: 0;
-            height: 100vh;
+        }
+
+        body {
+            margin: 0;
+            padding: 20px;
+            min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
-            background-color: #ffffff; 
-            overflow: hidden;
-            font-family: 'Great Vibes', cursive;
+            background-color: #0d1410; 
+            overflow-x: hidden;
+            font-family: 'Plus Jakarta Sans', sans-serif;
             position: relative;
+            color: #e5f5eb;
         }
 
-        .heart-bg {
+        /* Ambient Eco Glows */
+        .eco-bg {
             position: absolute;
-            color: rgba(255, 182, 193, 0.5);
-            font-size: 35px;
+            color: rgba(34, 197, 94, 0.15);
+            font-size: 38px;
             user-select: none;
             z-index: 1;
+            font-family: monospace;
         }
 
         .glass-box {
-            background-color: #ffdae0;
-            padding: 50px 30px;
-            border-radius: 40px;
-            box-shadow: 0 15px 35px rgba(214, 51, 132, 0.1);
+            background-color: #132219;
+            padding: 40px 30px;
+            border-radius: 28px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
             text-align: center;
             z-index: 10;
-            width: 90%;
-            max-width: 500px;
-            border: 2px solid #ffb6c1;
-            transition: 0.5s;
+            width: 100%;
+            max-width: 520px;
+            border: 1.5px solid #234d34;
+            transition: 0.4s ease;
         }
 
         .step-counter {
-            font-family: 'Dancing Script', cursive;
-            font-size: 1.2rem;
-            color: #d63384;
-            margin-bottom: 10px;
-            opacity: 0.7;
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: #4ade80;
+            margin-bottom: 12px;
+            font-weight: 700;
         }
 
         h1 {
-            font-size: 2.8rem;
-            color: #d63384;
-            margin-bottom: 30px;
-            font-weight: normal;
-            line-height: 1.2;
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.6rem;
+            color: #ffffff;
+            margin-bottom: 25px;
+            font-weight: 700;
+            line-height: 1.35;
         }
 
         .options-container {
             display: flex;
             flex-direction: column;
-            gap: 15px;
+            gap: 12px;
         }
 
         .opt-btn {
-            background-color: #ffffff;
-            color: #d63384;
-            border: 1px solid #ffb6c1;
-            padding: 12px 20px;
-            font-size: 1.6rem;
+            background-color: #1a2e22;
+            color: #d1fae5;
+            border: 1px solid #2b563b;
+            padding: 14px 18px;
+            font-size: 0.95rem;
             cursor: pointer;
-            border-radius: 15px;
-            font-family: 'Dancing Script', cursive;
-            transition: 0.3s;
+            border-radius: 14px;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-weight: 600;
+            transition: all 0.2s ease;
             text-align: left;
             display: flex;
             align-items: center;
+            line-height: 1.4;
         }
 
         .opt-btn:hover {
-            background-color: #ff69b4;
-            color: white;
-            transform: scale(1.02);
+            background-color: #22c55e;
+            color: #052e16;
+            transform: translateY(-2px);
+            border-color: #22c55e;
+            box-shadow: 0 6px 20px rgba(34, 197, 94, 0.25);
+        }
+
+        .opt-btn:hover .opt-label {
+            background: #052e16;
+            color: #22c55e;
         }
 
         .opt-label {
-            font-family: Arial, sans-serif;
-            font-weight: bold;
-            font-size: 1rem;
-            margin-right: 15px;
-            background: #ffdae0;
-            width: 28px;
-            height: 28px;
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 700;
+            font-size: 0.85rem;
+            margin-right: 14px;
+            background: #244231;
+            color: #4ade80;
+            min-width: 30px;
+            height: 30px;
             display: flex;
             align-items: center;
             justify-content: center;
             border-radius: 50%;
+            flex-shrink: 0;
+            transition: 0.2s ease;
         }
 
         .action-area {
             display: flex;
             justify-content: center;
-            gap: 30px;
-            min-height: 80px;
+            gap: 20px;
+            min-height: 90px;
             align-items: center;
             position: relative;
+            margin-top: 20px;
         }
 
         #yesBtn {
-            background-color: #ff69b4;
-            color: white;
-            padding: 12px 40px;
-            font-size: 2rem;
-            border-radius: 20px;
+            background-color: #22c55e;
+            color: #052e16;
+            padding: 12px 35px;
+            font-size: 1.1rem;
+            font-weight: 800;
+            border-radius: 14px;
             border: none;
-            font-family: 'Dancing Script', cursive;
+            font-family: 'Space Grotesk', sans-serif;
             cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        #yesBtn:hover {
+            transform: scale(1.05);
+            background-color: #4ade80;
         }
 
         #noBtn {
-            background-color: #ffffff;
-            color: #ff69b4;
+            background-color: #1a2e22;
+            color: #86efac;
             position: absolute;
-            border: 1px solid #ffb6c1;
-            padding: 12px 40px;
-            font-size: 2rem;
-            border-radius: 20px;
-            font-family: 'Dancing Script', cursive;
+            border: 1px solid #2b563b;
+            padding: 12px 30px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            border-radius: 14px;
+            font-family: 'Space Grotesk', sans-serif;
             cursor: pointer;
             z-index: 100;
+            transition: 0.1s ease-out;
+        }
+
+        #secret-message {
+            padding: 20px 0;
         }
 
         #secret-message h2 {
-            font-size: 5rem;
-            color: #d63384;
-            margin: 0;
-            animation: pulse 1.5s infinite;
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 2.2rem;
+            color: #4ade80;
+            margin-bottom: 12px;
         }
 
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.08); }
-            100% { transform: scale(1); }
+        #secret-message p {
+            color: #94a3b8;
+            font-size: 1rem;
+            line-height: 1.6;
         }
 
         .hidden { display: none; }
@@ -148,61 +186,111 @@
 </head>
 <body>
 
-    <div class="heart-bg" style="top: 10%; left: 15%;">❤</div>
-    <div class="heart-bg" style="top: 20%; right: 20%;">❤</div>
-    <div class="heart-bg" style="bottom: 15%; left: 10%;">❤</div>
-    <div class="heart-bg" style="bottom: 25%; right: 15%;">❤</div>
-    <div class="heart-bg" style="top: 50%; left: 5%;">❤</div>
+    <div class="eco-bg" style="top: 10%; left: 12%;">♻</div>
+    <div class="eco-bg" style="top: 20%; right: 15%;">✦</div>
+    <div class="eco-bg" style="bottom: 15%; left: 10%;">♻</div>
+    <div class="eco-bg" style="bottom: 25%; right: 18%;">⚙</div>
+    <div class="eco-bg" style="top: 50%; left: 6%;">✦</div>
 
     <div class="glass-box" id="mainContainer">
+        <!-- Interactive Steps -->
         <div id="quiz-section">
-            <div class="step-counter" id="stepText">Question 1 of 8</div>
+            <div class="step-counter" id="stepText">Section 1 of 6</div>
             <h1 id="questionText">Loading...</h1>
             <div class="options-container" id="optionsContainer"></div>
         </div>
 
+        <!-- Pitch Action Section -->
         <div id="final-section" class="hidden">
-            <h1>Sana kochee enne ishtaanoo?</h1>
+            <h1>Invest in the Closed-Loop Circular Future?</h1>
             <div class="action-area">
-                <button id="yesBtn" onclick="revealLove()">Yes</button>
-                <button id="noBtn" onmouseover="moveNo()" onclick="moveNo()">No</button>
+                <button id="yesBtn" onclick="revealPitch()">Partner With Us</button>
+                <button id="noBtn" onmouseover="moveNo()" onclick="moveNo()">Pass</button>
             </div>
         </div>
 
+        <!-- Pitch Conclusion -->
         <div id="secret-message" class="hidden">
-            <h2>I knew it ! ❤️</h2>
+            <h2>Welcome to Filamenta ♻️</h2>
+            <p>From discarded bottles to durable micro-manufactured goods. Scalable, sustainable, and profitable.</p>
         </div>
     </div>
 
     <script>
-        const questions = [
-            { q: "What do you think about Asloo?", a: ["I think about him occasionally", "I think about him sometimes", "I think about him quite often", "I think about him more than I expected"] },
-            { q: "How do you feel when Asloo talks to you?", a: ["It feels a little nice", "It feels pretty nice", "It makes me happy", "It makes me really happy"] },
-            { q: "If Asloo stopped talking for a while, what would happen?", a: ["I’d probably notice", "I’d miss him a little", "I’d miss him quite a bit", "I’d really miss him"] },
-            { q: "Why do you think you feel this way about Asloo?", a: ["Maybe I like him a little", "I probably like him", "I like him quite a lot", "I might actually love him"] },
-            { q: "When Asloo’s name pops up on your phone, what’s your reaction?", a: ["I feel a little curious", "I feel a bit happy", "I smile when I see it", "I get really happy"] },
-            { q: "If someone asked you about Asloo, what would you say?", a: ["He’s someone important", "He’s special to me", "I care about him a lot", "He means a lot to me"] },
-            { q: "Be honest… what word best describes your feelings?", a: ["A growing feeling", "A strong liking", "Deep affection", "Something very close to love"] },
-            { q: "So… what feels most accurate about your feelings for Asloo?", a: ["I might be falling for Asloo", "I’m probably falling for Asloo", "I think I love Asloo", "I definitely love Asloo"] }
+        const sections = [
+            { 
+                title: "What is Filamenta's Core Innovation?", 
+                items: [
+                    "Zero raw material cost via collected plastic waste",
+                    "Turning local plastic strips into 3D printer filament",
+                    "Hyper-local manufacturing for daily utility goods",
+                    "Closed-loop circular economy with zero waste"
+                ] 
+            },
+            { 
+                title: "How is the ₹10 Lakhs Capital Allocated?", 
+                items: [
+                    "₹5,00,000 for 25 FDM 3D Printers & strip pullers",
+                    "₹2,00,000 for collection logistics & washing prep",
+                    "₹1,50,000 for campus marketing & kraft branding",
+                    "₹1,30,000 for warehouse setup & street bins"
+                ] 
+            },
+            { 
+                title: "Who are our Primary Customer Segments?", 
+                items: [
+                    "Gen Z & students buying toys, docks & keychains",
+                    "College fests ordering custom bulk merchandise",
+                    "Wedding organizers looking for sustainable return gifts",
+                    "Partnered apartments needing low-cost utility goods"
+                ] 
+            },
+            { 
+                title: "What is the Apartment Mutualism Model?", 
+                items: [
+                    "Apartments supply clean plastic bottles directly",
+                    "We provide branded collection bins at their doors",
+                    "They get daily utility goods at discounted rates",
+                    "Zero material procurement cost with repeat sales"
+                ] 
+            },
+            { 
+                title: "What is our Target Market Size?", 
+                items: [
+                    "TAM: ₹15,000+ Cr (Indian recycled consumer goods)",
+                    "SAM: ₹150 - ₹200 Cr (South Indian youth & events)",
+                    "SOM: ₹30L - ₹60L (Year 1-2 realistic operational target)",
+                    "High gross margin driven by near-zero material cost"
+                ] 
+            },
+            { 
+                title: "How do we mitigate Operational Risks?", 
+                items: [
+                    "Strict drying to eliminate moisture & print bubbling",
+                    "Accurate strip tolerance control to prevent clogs",
+                    "25-printer distributed farm to prevent downtime",
+                    "High-wear hardened nozzles for continuous output"
+                ] 
+            }
         ];
 
         let currentStep = 0;
         const labels = ["A", "B", "C", "D"];
 
-        function loadQuestion() {
-            if (currentStep < questions.length) {
-                const qData = questions[currentStep];
-                document.getElementById('stepText').innerText = `Question ${currentStep + 1} of 8`;
-                document.getElementById('questionText').innerText = qData.q;
+        function loadStep() {
+            if (currentStep < sections.length) {
+                const data = sections[currentStep];
+                document.getElementById('stepText').innerText = `Section ${currentStep + 1} of ${sections.length}`;
+                document.getElementById('questionText').innerText = data.title;
                 
                 const container = document.getElementById('optionsContainer');
                 container.innerHTML = '';
 
-                qData.a.forEach((opt, i) => {
+                data.items.forEach((item, i) => {
                     const btn = document.createElement('button');
                     btn.className = 'opt-btn';
-                    btn.innerHTML = `<span class="opt-label">${labels[i]}</span> ${opt}`;
-                    btn.onclick = nextQuestion;
+                    btn.innerHTML = `<span class="opt-label">${labels[i]}</span> ${item}`;
+                    btn.onclick = nextStep;
                     container.appendChild(btn);
                 });
             } else {
@@ -211,9 +299,9 @@
             }
         }
 
-        function nextQuestion() {
+        function nextStep() {
             currentStep++;
-            loadQuestion();
+            loadStep();
         }
 
         function moveNo() {
@@ -223,21 +311,16 @@
             const maxY = window.innerHeight - btn.offsetHeight - padding;
             
             btn.style.position = 'fixed';
-            btn.style.left = Math.random() * maxX + 'px';
-            btn.style.top = Math.random() * maxY + 'px';
+            btn.style.left = Math.max(10, Math.random() * maxX) + 'px';
+            btn.style.top = Math.max(10, Math.random() * maxY) + 'px';
         }
 
-        function revealLove() {
+        function revealPitch() {
             document.getElementById('final-section').classList.add('hidden');
             document.getElementById('secret-message').classList.remove('hidden');
-            
-            const container = document.getElementById('mainContainer');
-            container.style.backgroundColor = 'transparent';
-            container.style.border = 'none';
-            container.style.boxShadow = 'none';
         }
 
-        loadQuestion();
+        loadStep();
     </script>
 </body>
 </html>
