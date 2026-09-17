@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Filamenta | Interactive Deck</title>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
+    <title>Filamenta | Interactive Pitch & Deck</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Space+Grotesk:wght@600;700;800&display=swap" rel="stylesheet">
     <style>
         * {
             box-sizing: border-box;
@@ -19,17 +19,17 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            background-color: #f0fdf4; /* Soft Light Green */
+            background-color: #f2fbf5;
             overflow-x: hidden;
             font-family: 'Plus Jakarta Sans', sans-serif;
             position: relative;
             color: #14532d;
         }
 
-        /* Ambient Background Floating Elements */
+        /* Floating Eco Icons */
         .eco-bg {
             position: absolute;
-            color: rgba(34, 197, 94, 0.2);
+            color: rgba(34, 197, 94, 0.22);
             font-size: 36px;
             user-select: none;
             z-index: 1;
@@ -45,7 +45,7 @@
             z-index: 10;
             width: 100%;
             max-width: 520px;
-            border: 1.5px solid #bbf7d0;
+            border: 1.5px solid #c7f2d4;
             transition: 0.3s ease;
         }
 
@@ -131,10 +131,10 @@
             margin-top: 20px;
         }
 
-        #yesBtn {
+        .primary-btn {
             background-color: #16a34a;
             color: #ffffff;
-            padding: 12px 35px;
+            padding: 14px 35px;
             font-size: 1.1rem;
             font-weight: 700;
             border-radius: 14px;
@@ -142,10 +142,10 @@
             font-family: 'Space Grotesk', sans-serif;
             cursor: pointer;
             transition: transform 0.2s, background-color 0.2s;
-            box-shadow: 0 4px 14px rgba(22, 163, 74, 0.3);
+            box-shadow: 0 4px 14px rgba(22, 163, 74, 0.25);
         }
 
-        #yesBtn:hover {
+        .primary-btn:hover {
             transform: scale(1.05);
             background-color: #15803d;
         }
@@ -165,31 +165,41 @@
             transition: 0.1s ease-out;
         }
 
-        /* Final Screen Styling */
-        .summary-card {
-            padding: 20px 10px;
+        /* Screen Stylings */
+        .welcome-screen h2 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 2.3rem;
+            color: #15803d;
+            margin-bottom: 12px;
+            font-weight: 800;
         }
 
-        .summary-card h2 {
+        .welcome-screen p {
+            color: #475569;
+            font-size: 1rem;
+            line-height: 1.6;
+            margin-bottom: 25px;
+        }
+
+        .final-screen h2 {
+            font-family: 'Space Grotesk', sans-serif;
             color: #15803d;
-            font-size: 2.1rem;
+            font-size: 2.2rem;
             font-weight: 800;
             line-height: 1.3;
             margin-bottom: 20px;
-            font-family: 'Space Grotesk', sans-serif;
         }
 
-        .summary-card hr {
+        .final-screen hr {
             border: none;
-            border-top: 1.5px solid #bbf7d0;
+            border-top: 1.5px solid #86efac;
             margin: 20px auto;
-            max-width: 200px;
+            max-width: 220px;
         }
 
-        .summary-card p {
+        .final-screen p {
             font-size: 0.95rem;
             color: #166534;
-            font-weight: 500;
         }
 
         .hidden { display: none; }
@@ -204,28 +214,37 @@
     <div class="eco-bg" style="top: 50%; left: 6%;">✦</div>
 
     <div class="glass-box" id="mainContainer">
-        <!-- Interactive Sections -->
-        <div id="quiz-section">
+        
+        <!-- Screen 1: Welcome to Filamenta -->
+        <div id="welcome-section" class="welcome-screen">
+            <h2>Welcome to Filamenta ♻️</h2>
+            <p>From discarded plastic bottles to high-utility micro-manufactured everyday goods. Scalable, sustainable, and profitable.</p>
+            <button class="primary-btn" onclick="startDeck()">Start Exploring</button>
+        </div>
+
+        <!-- Screen 2: Interactive Deck Points -->
+        <div id="quiz-section" class="hidden">
             <div class="step-counter" id="stepText">Section 1 of 6</div>
             <h1 id="questionText">Loading...</h1>
             <div class="options-container" id="optionsContainer"></div>
         </div>
 
-        <!-- Action Step -->
+        <!-- Screen 3: Action Step -->
         <div id="final-section" class="hidden">
             <h1>Ready to step into circular production?</h1>
             <div class="action-area">
-                <button id="yesBtn" onclick="revealPitch()">Yes</button>
+                <button class="primary-btn" onclick="revealPitch()">Yes</button>
                 <button id="noBtn" onmouseover="moveNo()" onclick="moveNo()">Pass</button>
             </div>
         </div>
 
-        <!-- Final Message -->
-        <div id="secret-message" class="hidden summary-card">
+        <!-- Screen 4: Final Message -->
+        <div id="secret-message" class="hidden final-screen">
             <h2>We plan further business with you 🤝</h2>
             <hr>
             <p><i>random code by Asloo</i></p>
         </div>
+
     </div>
 
     <script>
@@ -289,6 +308,12 @@
         let currentStep = 0;
         const labels = ["A", "B", "C", "D"];
 
+        function startDeck() {
+            document.getElementById('welcome-section').classList.add('hidden');
+            document.getElementById('quiz-section').classList.remove('hidden');
+            loadStep();
+        }
+
         function loadStep() {
             if (currentStep < sections.length) {
                 const data = sections[currentStep];
@@ -331,8 +356,6 @@
             document.getElementById('final-section').classList.add('hidden');
             document.getElementById('secret-message').classList.remove('hidden');
         }
-
-        loadStep();
     </script>
 </body>
 </html>
