@@ -38,7 +38,7 @@
 
         .glass-box {
             background-color: #ffffff;
-            padding: 40px 30px;
+            padding: 35px 26px;
             border-radius: 28px;
             box-shadow: 0 15px 35px rgba(22, 101, 52, 0.08);
             text-align: center;
@@ -63,9 +63,85 @@
             font-family: 'Space Grotesk', sans-serif;
             font-size: 1.55rem;
             color: #0f172a;
-            margin-bottom: 25px;
+            margin-bottom: 20px;
             font-weight: 700;
             line-height: 1.35;
+        }
+
+        /* SOM/TAM Chart Section */
+        .chart-box {
+            background: #f8fafc;
+            border: 1.5px solid #dcfce7;
+            border-radius: 18px;
+            padding: 16px;
+            margin-bottom: 18px;
+            text-align: left;
+        }
+
+        .metric-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: 5px;
+        }
+
+        .metric-title {
+            font-weight: 700;
+            font-size: 0.85rem;
+            color: #166534;
+        }
+
+        .metric-val {
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 800;
+            color: #0f172a;
+            font-size: 0.95rem;
+        }
+
+        .bar-wrap {
+            background: #e2e8f0;
+            height: 8px;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 12px;
+        }
+
+        .bar-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #22c55e, #16a34a);
+            border-radius: 10px;
+        }
+
+        .target-cards {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-top: 14px;
+            padding-top: 14px;
+            border-top: 1px dashed #bbf7d0;
+        }
+
+        .target-card {
+            background: #ffffff;
+            padding: 10px;
+            border-radius: 12px;
+            border: 1px solid #dcfce7;
+            text-align: center;
+        }
+
+        .target-card span {
+            display: block;
+            font-size: 0.75rem;
+            color: #64748b;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .target-card strong {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.2rem;
+            color: #15803d;
+            font-weight: 800;
         }
 
         .options-container {
@@ -226,14 +302,47 @@
         <div id="quiz-section" class="hidden">
             <div class="step-counter" id="stepText">Section 1 of 6</div>
             <h1 id="questionText">Loading...</h1>
+
+            <!-- Graph Box (Section 5-ൽ മാത്രം ഓൺ ആകും) -->
+            <div id="chartContainer" class="hidden chart-box">
+                <div class="metric-row">
+                    <span class="metric-title">TAM (Total Available Market)</span>
+                    <span class="metric-val">₹15,000+ Cr</span>
+                </div>
+                <div class="bar-wrap"><div class="bar-fill" style="width: 100%;"></div></div>
+
+                <div class="metric-row">
+                    <span class="metric-title">SAM (South India Youth & Events)</span>
+                    <span class="metric-val">₹180 Cr</span>
+                </div>
+                <div class="bar-wrap"><div class="bar-fill" style="width: 50%;"></div></div>
+
+                <div class="metric-row">
+                    <span class="metric-title">SOM (Year 1 Target Market)</span>
+                    <span class="metric-val">₹40 Lakhs</span>
+                </div>
+                <div class="bar-wrap"><div class="bar-fill" style="width: 22%;"></div></div>
+
+                <div class="target-cards">
+                    <div class="target-card">
+                        <span>Annual Target</span>
+                        <strong>₹40 Lakhs</strong>
+                    </div>
+                    <div class="target-card">
+                        <span>Monthly Run-Rate</span>
+                        <strong>₹3.33 Lakhs</strong>
+                    </div>
+                </div>
+            </div>
+
             <div class="options-container" id="optionsContainer"></div>
         </div>
 
         <!-- Screen 3: Action Step -->
         <div id="final-section" class="hidden">
-            <h1>Invest in the Closed-Loop Circular Future?</h1>
+            <h1>Ready to step into circular production?</h1>
             <div class="action-area">
-                <button class="primary-btn" onclick="revealPitch()">Partner With Us</button>
+                <button class="primary-btn" onclick="revealPitch()">Yes</button>
                 <button id="noBtn" onmouseover="moveNo()" onclick="moveNo()">Pass</button>
             </div>
         </div>
@@ -286,12 +395,13 @@
                 ] 
             },
             { 
-                title: "What is our Target Market Size?", 
+                title: "Market Sizing & Revenue Split",
+                showChart: true,
                 items: [
                     "TAM: ₹15,000+ Cr (Indian recycled consumer goods)",
-                    "SAM: ₹150 - ₹200 Cr (South Indian student & fest hubs)",
-                    "SOM: ₹30L - ₹60L (Realistic Year 1-2 targets)",
-                    "High gross margin driven by free raw material"
+                    "SAM: ₹180 Cr (South Indian student & fest hubs)",
+                    "Annual Target (SOM): ₹40,00,000",
+                    "Monthly Required Run-Rate: ₹3,33,333 / Month"
                 ] 
             },
             { 
@@ -320,6 +430,13 @@
                 document.getElementById('stepText').innerText = `Section ${currentStep + 1} of ${sections.length}`;
                 document.getElementById('questionText').innerText = data.title;
                 
+                const chartBox = document.getElementById('chartContainer');
+                if (data.showChart) {
+                    chartBox.classList.remove('hidden');
+                } else {
+                    chartBox.classList.add('hidden');
+                }
+
                 const container = document.getElementById('optionsContainer');
                 container.innerHTML = '';
 
