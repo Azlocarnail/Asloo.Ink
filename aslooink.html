@@ -19,14 +19,14 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            background-color: #f2fbf5;
+            background-color: #f2fbf5; /* Soft Mint Green */
             overflow-x: hidden;
             font-family: 'Plus Jakarta Sans', sans-serif;
             position: relative;
             color: #14532d;
         }
 
-        /* Floating Eco Icons */
+        /* Ambient Eco Background Icons */
         .eco-bg {
             position: absolute;
             color: rgba(34, 197, 94, 0.22);
@@ -49,23 +49,127 @@
             transition: 0.3s ease;
         }
 
+        /* Top Header with Step Text & Dots */
+        .top-nav-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 14px;
+        }
+
         .step-counter {
             font-family: 'Space Grotesk', sans-serif;
             font-size: 0.85rem;
             text-transform: uppercase;
             letter-spacing: 1.5px;
             color: #16a34a;
-            margin-bottom: 12px;
             font-weight: 700;
+        }
+
+        .dots-wrapper {
+            display: flex;
+            gap: 6px;
+            align-items: center;
+        }
+
+        .slider-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #dcfce7;
+            cursor: pointer;
+            transition: all 0.25s ease;
+        }
+
+        .slider-dot.active {
+            background: #16a34a;
+            width: 20px;
+            border-radius: 10px;
         }
 
         h1 {
             font-family: 'Space Grotesk', sans-serif;
             font-size: 1.55rem;
             color: #0f172a;
-            margin-bottom: 22px;
+            margin-bottom: 20px;
             font-weight: 700;
             line-height: 1.35;
+        }
+
+        /* Market Graph & Target Card Styling */
+        .chart-box {
+            background: #f8fafc;
+            border: 1.5px solid #dcfce7;
+            border-radius: 18px;
+            padding: 16px;
+            margin-bottom: 18px;
+            text-align: left;
+        }
+
+        .metric-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: 5px;
+        }
+
+        .metric-title {
+            font-weight: 700;
+            font-size: 0.85rem;
+            color: #166534;
+        }
+
+        .metric-val {
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 800;
+            color: #0f172a;
+            font-size: 0.95rem;
+        }
+
+        .bar-wrap {
+            background: #e2e8f0;
+            height: 8px;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 12px;
+        }
+
+        .bar-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #22c55e, #16a34a);
+            border-radius: 10px;
+        }
+
+        .target-cards {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-top: 14px;
+            padding-top: 14px;
+            border-top: 1px dashed #bbf7d0;
+        }
+
+        .target-card {
+            background: #ffffff;
+            padding: 10px;
+            border-radius: 12px;
+            border: 1px solid #dcfce7;
+            text-align: center;
+        }
+
+        .target-card span {
+            display: block;
+            font-size: 0.75rem;
+            color: #64748b;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .target-card strong {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.2rem;
+            color: #15803d;
+            font-weight: 800;
         }
 
         .options-container {
@@ -121,80 +225,37 @@
             transition: 0.2s ease;
         }
 
-        /* Market Graph & Target Card Styling */
-        .chart-box {
-            background: #f8fafc;
-            border: 1.5px solid #dcfce7;
-            border-radius: 18px;
-            padding: 18px;
-            margin-bottom: 18px;
-            text-align: left;
-        }
-
-        .metric-row {
+        /* Bottom Slider Arrows */
+        .slider-nav {
             display: flex;
             justify-content: space-between;
-            align-items: baseline;
-            margin-bottom: 5px;
-        }
-
-        .metric-title {
-            font-weight: 700;
-            font-size: 0.85rem;
-            color: #166534;
-        }
-
-        .metric-val {
-            font-family: 'Space Grotesk', sans-serif;
-            font-weight: 800;
-            color: #0f172a;
-            font-size: 0.95rem;
-        }
-
-        .bar-wrap {
-            background: #e2e8f0;
-            height: 8px;
-            border-radius: 10px;
-            overflow: hidden;
-            margin-bottom: 12px;
-        }
-
-        .bar-fill {
-            height: 100%;
-            background: linear-gradient(90deg, #22c55e, #16a34a);
-            border-radius: 10px;
-        }
-
-        .target-cards {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
+            align-items: center;
+            margin-top: 20px;
             gap: 12px;
-            margin-top: 14px;
-            padding-top: 14px;
-            border-top: 1px dashed #bbf7d0;
         }
 
-        .target-card {
-            background: #ffffff;
-            padding: 10px;
+        .arrow-btn {
+            background-color: #ffffff;
+            color: #16a34a;
+            border: 1.5px solid #bbf7d0;
+            padding: 9px 18px;
+            font-size: 0.9rem;
+            font-weight: 700;
             border-radius: 12px;
-            border: 1px solid #dcfce7;
-            text-align: center;
-        }
-
-        .target-card span {
-            display: block;
-            font-size: 0.75rem;
-            color: #64748b;
-            font-weight: 600;
-            text-transform: uppercase;
-        }
-
-        .target-card strong {
             font-family: 'Space Grotesk', sans-serif;
-            font-size: 1.2rem;
-            color: #15803d;
-            font-weight: 800;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .arrow-btn:hover:not(:disabled) {
+            background-color: #16a34a;
+            color: #ffffff;
+            border-color: #16a34a;
+        }
+
+        .arrow-btn:disabled {
+            opacity: 0.35;
+            cursor: not-allowed;
         }
 
         .action-area {
@@ -299,7 +360,11 @@
 
         <!-- Screen 2: Interactive Deck Points & Visual Graph -->
         <div id="quiz-section" class="hidden">
-            <div class="step-counter" id="stepText">Section 1 of 6</div>
+            <div class="top-nav-bar">
+                <div class="step-counter" id="stepText">Section 1 of 6</div>
+                <div class="dots-wrapper" id="dotsContainer"></div>
+            </div>
+
             <h1 id="questionText">Loading...</h1>
 
             <!-- Dynamic Market Sizing Graph Container -->
@@ -335,10 +400,19 @@
             </div>
 
             <div class="options-container" id="optionsContainer"></div>
+
+            <!-- Arrow Slider Controls -->
+            <div class="slider-nav">
+                <button class="arrow-btn" id="prevBtn" onclick="prevStep()">← Prev</button>
+                <button class="arrow-btn" id="nextBtn" onclick="nextStep()">Next →</button>
+            </div>
         </div>
 
         <!-- Screen 3: Action Step -->
         <div id="final-section" class="hidden">
+            <div style="text-align: left; margin-bottom: 12px;">
+                <button class="arrow-btn" onclick="backToDeck()">← Back to Deck</button>
+            </div>
             <h1>Ready to step into circular production?</h1>
             <div class="action-area">
                 <button class="primary-btn" onclick="revealPitch()">Yes</button>
@@ -420,7 +494,33 @@
         function startDeck() {
             document.getElementById('welcome-section').classList.add('hidden');
             document.getElementById('quiz-section').classList.remove('hidden');
+            createDots();
             loadStep();
+        }
+
+        function createDots() {
+            const container = document.getElementById('dotsContainer');
+            container.innerHTML = '';
+            sections.forEach((_, idx) => {
+                const dot = document.createElement('div');
+                dot.className = `slider-dot ${idx === currentStep ? 'active' : ''}`;
+                dot.onclick = () => {
+                    currentStep = idx;
+                    loadStep();
+                };
+                container.appendChild(dot);
+            });
+        }
+
+        function updateDots() {
+            const dots = document.querySelectorAll('.slider-dot');
+            dots.forEach((d, idx) => {
+                if (idx === currentStep) {
+                    d.classList.add('active');
+                } else {
+                    d.classList.remove('active');
+                }
+            });
         }
 
         function loadStep() {
@@ -446,6 +546,11 @@
                     btn.onclick = nextStep;
                     container.appendChild(btn);
                 });
+
+                document.getElementById('prevBtn').disabled = (currentStep === 0);
+                document.getElementById('nextBtn').innerText = (currentStep === sections.length - 1) ? 'Proceed →' : 'Next →';
+                
+                updateDots();
             } else {
                 document.getElementById('quiz-section').classList.add('hidden');
                 document.getElementById('final-section').classList.remove('hidden');
@@ -454,6 +559,20 @@
 
         function nextStep() {
             currentStep++;
+            loadStep();
+        }
+
+        function prevStep() {
+            if (currentStep > 0) {
+                currentStep--;
+                loadStep();
+            }
+        }
+
+        function backToDeck() {
+            currentStep = sections.length - 1;
+            document.getElementById('final-section').classList.add('hidden');
+            document.getElementById('quiz-section').classList.remove('hidden');
             loadStep();
         }
 
