@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Filamenta | Interactive Pitch & Deck</title>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Space+Grotesk:wght@600;700;800&display=swap" rel="stylesheet">
     <style>
         * {
             box-sizing: border-box;
@@ -131,10 +131,10 @@
             margin-top: 20px;
         }
 
-        #yesBtn {
+        .primary-btn {
             background-color: #16a34a;
             color: #ffffff;
-            padding: 12px 35px;
+            padding: 13px 35px;
             font-size: 1.1rem;
             font-weight: 700;
             border-radius: 14px;
@@ -145,7 +145,7 @@
             box-shadow: 0 4px 14px rgba(22, 163, 74, 0.25);
         }
 
-        #yesBtn:hover {
+        .primary-btn:hover {
             transform: scale(1.05);
             background-color: #15803d;
         }
@@ -165,22 +165,41 @@
             transition: 0.1s ease-out;
         }
 
-        #secret-message {
-            padding: 20px 0;
-        }
-
-        #secret-message h2 {
+        /* Screen Stylings */
+        .welcome-screen h2 {
             font-family: 'Space Grotesk', sans-serif;
-            font-size: 2.1rem;
+            font-size: 2.3rem;
             color: #15803d;
             margin-bottom: 12px;
             font-weight: 800;
         }
 
-        #secret-message p {
+        .welcome-screen p {
             color: #475569;
             font-size: 1rem;
             line-height: 1.6;
+            margin-bottom: 25px;
+        }
+
+        .final-screen h2 {
+            font-family: 'Space Grotesk', sans-serif;
+            color: #15803d;
+            font-size: 2.2rem;
+            font-weight: 800;
+            line-height: 1.3;
+            margin-bottom: 20px;
+        }
+
+        .final-screen hr {
+            border: none;
+            border-top: 1.5px solid #86efac;
+            margin: 20px auto;
+            max-width: 220px;
+        }
+
+        .final-screen p {
+            font-size: 0.95rem;
+            color: #166534;
         }
 
         .hidden { display: none; }
@@ -195,27 +214,37 @@
     <div class="eco-bg" style="top: 50%; left: 6%;">✦</div>
 
     <div class="glass-box" id="mainContainer">
-        <!-- Interactive Steps -->
-        <div id="quiz-section">
+        
+        <!-- Screen 1: Welcome to Filamenta -->
+        <div id="welcome-section" class="welcome-screen">
+            <h2>Welcome to Filamenta ♻️</h2>
+            <p>From discarded plastic bottles to high-utility micro-manufactured everyday goods. Scalable, sustainable, and profitable.</p>
+            <button class="primary-btn" onclick="startDeck()">Start Exploring</button>
+        </div>
+
+        <!-- Screen 2: Interactive Deck Sections -->
+        <div id="quiz-section" class="hidden">
             <div class="step-counter" id="stepText">Section 1 of 6</div>
             <h1 id="questionText">Loading...</h1>
             <div class="options-container" id="optionsContainer"></div>
         </div>
 
-        <!-- Pitch Action Section -->
+        <!-- Screen 3: Action Step -->
         <div id="final-section" class="hidden">
             <h1>Invest in the Closed-Loop Circular Future?</h1>
             <div class="action-area">
-                <button id="yesBtn" onclick="revealPitch()">Partner With Us</button>
+                <button class="primary-btn" onclick="revealPitch()">Partner With Us</button>
                 <button id="noBtn" onmouseover="moveNo()" onclick="moveNo()">Pass</button>
             </div>
         </div>
 
-        <!-- Pitch Conclusion -->
-        <div id="secret-message" class="hidden">
-            <h2>Welcome to Filamenta ♻️</h2>
-            <p>From discarded bottles to durable micro-manufactured goods. Scalable, sustainable, and profitable.</p>
+        <!-- Screen 4: Final Message -->
+        <div id="secret-message" class="hidden final-screen">
+            <h2>We plan further business with you 🤝</h2>
+            <hr>
+            <p><i>random code by Asloo</i></p>
         </div>
+
     </div>
 
     <script>
@@ -225,59 +254,65 @@
                 items: [
                     "Zero raw material cost via collected plastic waste",
                     "Turning local plastic strips into 3D printer filament",
-                    "Hyper-local manufacturing for daily utility goods",
-                    "Closed-loop circular economy with zero waste"
+                    "Hyper-local micro-manufacturing for daily utilities",
+                    "Closed-loop circular model with zero landfill waste"
                 ] 
             },
             { 
                 title: "How is the ₹10 Lakhs Capital Allocated?", 
                 items: [
-                    "₹5,00,000 for 25 FDM 3D Printers & strip pullers",
-                    "₹2,00,000 for collection logistics & washing prep",
-                    "₹1,50,000 for campus marketing & kraft branding",
-                    "₹1,30,000 for warehouse setup & street bins"
+                    "₹5,00,000 for 25 FDM 3D Printers & pullers",
+                    "₹2,00,000 for collection logistics & prep supplies",
+                    "₹1,50,000 for marketing, campus events & branding",
+                    "₹1,30,000 for warehouse setup & street drop bins"
                 ] 
             },
             { 
                 title: "Who are our Primary Customer Segments?", 
                 items: [
                     "Gen Z & students buying toys, docks & keychains",
-                    "College fests ordering custom bulk merchandise",
+                    "College fests ordering custom bulk badges & gifts",
                     "Wedding organizers looking for sustainable return gifts",
-                    "Partnered apartments needing low-cost utility goods"
+                    "Partnered apartments needing low-cost home utilities"
                 ] 
             },
             { 
                 title: "What is the Apartment Mutualism Model?", 
                 items: [
                     "Apartments supply clean plastic bottles directly",
-                    "We provide branded collection bins at their doors",
-                    "They get daily utility goods at discounted rates",
-                    "Zero material procurement cost with repeat sales"
+                    "Branded drop-off bins provided right at their gate",
+                    "Residents get home utility goods at discounted rates",
+                    "Zero procurement cost with guaranteed repeat orders"
                 ] 
             },
             { 
                 title: "What is our Target Market Size?", 
                 items: [
                     "TAM: ₹15,000+ Cr (Indian recycled consumer goods)",
-                    "SAM: ₹150 - ₹200 Cr (South Indian youth & events)",
-                    "SOM: ₹30L - ₹60L (Year 1-2 realistic operational target)",
-                    "High gross margin driven by near-zero material cost"
+                    "SAM: ₹150 - ₹200 Cr (South Indian student & fest hubs)",
+                    "SOM: ₹30L - ₹60L (Realistic Year 1-2 targets)",
+                    "High gross margin driven by free raw material"
                 ] 
             },
             { 
                 title: "How do we mitigate Operational Risks?", 
                 items: [
                     "Strict drying to eliminate moisture & print bubbling",
-                    "Accurate strip tolerance control to prevent clogs",
+                    "Consistent strip tolerance control to prevent clogs",
                     "25-printer distributed farm to prevent downtime",
-                    "High-wear hardened nozzles for continuous output"
+                    "Hardened nozzles built for continuous output"
                 ] 
             }
         ];
 
         let currentStep = 0;
         const labels = ["A", "B", "C", "D"];
+
+        function startDeck() {
+            document.getElementById('welcome-section').classList.add('hidden');
+            document.getElementById('quiz-section').classList.remove('hidden');
+            loadStep();
+        }
 
         function loadStep() {
             if (currentStep < sections.length) {
@@ -313,16 +348,14 @@
             const maxY = window.innerHeight - btn.offsetHeight - padding;
             
             btn.style.position = 'fixed';
-            btn.style.left = Math.max(10, Math.random() * maxX) + 'px';
-            btn.style.top = Math.max(10, Math.random() * maxY) + 'px';
+            btn.style.left = Math.max(15, Math.random() * maxX) + 'px';
+            btn.style.top = Math.max(15, Math.random() * maxY) + 'px';
         }
 
         function revealPitch() {
             document.getElementById('final-section').classList.add('hidden');
             document.getElementById('secret-message').classList.remove('hidden');
         }
-
-        loadStep();
     </script>
 </body>
 </html>
