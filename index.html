@@ -49,14 +49,42 @@
             transition: 0.3s ease;
         }
 
+        /* Top Bar with Step Text & Dots */
+        .top-nav-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 14px;
+        }
+
         .step-counter {
             font-family: 'Space Grotesk', sans-serif;
             font-size: 0.85rem;
             text-transform: uppercase;
             letter-spacing: 1.5px;
             color: #16a34a;
-            margin-bottom: 12px;
             font-weight: 700;
+        }
+
+        .dots-wrapper {
+            display: flex;
+            gap: 6px;
+            align-items: center;
+        }
+
+        .slider-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #dcfce7;
+            cursor: pointer;
+            transition: all 0.25s ease;
+        }
+
+        .slider-dot.active {
+            background: #16a34a;
+            width: 20px;
+            border-radius: 10px;
         }
 
         h1 {
@@ -197,6 +225,39 @@
             transition: 0.2s ease;
         }
 
+        /* Bottom Slider Controls */
+        .slider-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 20px;
+            gap: 12px;
+        }
+
+        .arrow-btn {
+            background-color: #ffffff;
+            color: #16a34a;
+            border: 1.5px solid #bbf7d0;
+            padding: 9px 18px;
+            font-size: 0.9rem;
+            font-weight: 700;
+            border-radius: 12px;
+            font-family: 'Space Grotesk', sans-serif;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .arrow-btn:hover:not(:disabled) {
+            background-color: #16a34a;
+            color: #ffffff;
+            border-color: #16a34a;
+        }
+
+        .arrow-btn:disabled {
+            opacity: 0.35;
+            cursor: not-allowed;
+        }
+
         .action-area {
             display: flex;
             justify-content: center;
@@ -298,9 +359,13 @@
             <button class="primary-btn" onclick="startDeck()">Start Exploring</button>
         </div>
 
-        <!-- Screen 2: Interactive Deck Sections -->
+        <!-- Screen 2: Interactive Deck Sections with Slider Arrows & Dots -->
         <div id="quiz-section" class="hidden">
-            <div class="step-counter" id="stepText">Section 1 of 6</div>
+            <div class="top-nav-bar">
+                <div class="step-counter" id="stepText">Section 1 of 6</div>
+                <div class="dots-wrapper" id="dotsContainer"></div>
+            </div>
+
             <h1 id="questionText">Loading...</h1>
 
             <!-- Graph Box (Section 5-ൽ മാത്രം ഓൺ ആകും) -->
@@ -336,10 +401,19 @@
             </div>
 
             <div class="options-container" id="optionsContainer"></div>
+
+            <!-- Arrow Slider Controls -->
+            <div class="slider-nav">
+                <button class="arrow-btn" id="prevBtn" onclick="prevStep()">← Prev</button>
+                <button class="arrow-btn" id="nextBtn" onclick="nextStep()">Next →</button>
+            </div>
         </div>
 
         <!-- Screen 3: Action Step -->
         <div id="final-section" class="hidden">
+            <div style="text-align: left; margin-bottom: 12px;">
+                <button class="arrow-btn" onclick="backToDeck()">← Back to Deck</button>
+            </div>
             <h1>Ready to step into circular production?</h1>
             <div class="action-area">
                 <button class="primary-btn" onclick="revealPitch()">Yes</button>
@@ -421,7 +495,33 @@
         function startDeck() {
             document.getElementById('welcome-section').classList.add('hidden');
             document.getElementById('quiz-section').classList.remove('hidden');
+            createDots();
             loadStep();
+        }
+
+        function createDots() {
+            const container = document.getElementById('dotsContainer');
+            container.innerHTML = '';
+            sections.forEach((_, idx) => {
+                const dot = document.createElement('div');
+                dot.className = `slider-dot ${idx === currentStep ? 'active' : ''}`;
+                dot.onclick = () => {
+                    currentStep = idx;
+                    loadStep();
+                };
+                container.appendChild(dot);
+            });
+        }
+
+        function updateDots() {
+            const dots = document.querySelectorAll('.slider-dot');
+            dots.forEach((d, idx) => {
+                if (idx === currentStep) {
+                    d.classList.add('active');
+                } else {
+                    d.classList.remove('active');
+                }
+            });
         }
 
         function loadStep() {
@@ -447,6 +547,11 @@
                     btn.onclick = nextStep;
                     container.appendChild(btn);
                 });
+
+                document.getElementById('prevBtn').disabled = (currentStep === 0);
+                document.getElementById('nextBtn').innerText = (currentStep === sections.length - 1) ? 'Proceed →' : 'Next →';
+                
+                updateDots();
             } else {
                 document.getElementById('quiz-section').classList.add('hidden');
                 document.getElementById('final-section').classList.remove('hidden');
@@ -455,6 +560,20 @@
 
         function nextStep() {
             currentStep++;
+            loadStep();
+        }
+
+        function prevStep() {
+            if (currentStep > 0) {
+                currentStep--;
+                loadStep();
+            }
+        }
+
+        function backToDeck() {
+            currentStep = sections.length - 1;
+            document.getElementById('final-section').classList.add('hidden');
+            document.getElementById('quiz-section').classList.remove('hidden');
             loadStep();
         }
 
